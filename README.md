@@ -1,6 +1,6 @@
 # phonegap-example-app
 
-An example app for phonegap. Uses [bootstrap](http://getbootstrap.com/).
+An example app made with [PhoneGap](http://phonegap.com/). Uses [bootstrap](http://getbootstrap.com/). Here's a gigantic screenshot.
 
 ![Screenshot](https://raw.githubusercontent.com/dhulihan/phonegap-example-app/master/screenshot.png)
 
