@@ -22,13 +22,12 @@
 
 body {
     background: url(/res/bg/congruent_outline.png) #222;
-    padding: 10px 0 10px 0;
     color: white;
 }
 
 h1, h2, h3 {
     font-weight:normal;
-    margin:0px;
+    margin:0 0 10px;
     overflow:visible;
     padding:0px;
     text-align:center;
@@ -61,16 +60,25 @@ hr {
     margin: 10px;
 }
 
+/* Bootstrap */
+.nav-header {
+    border-radius: 0;
+}
 .container,
 .container-fluid {
     text-align: center
 }
 
-.container-secondary {
-    margin: 10px 0;
+.container-alpha,
+.container-bravo,
+.container-charlie {
+    margin: 0 0 20px;
     padding: 10px;
-    background: #3f9474;
 }
+
+.container-bravo {background: #3F7369;}
+.container-charlie {background: #CE5251;}
+.container-delta {background: #1A2A40}
 
 .table  {
     text-align: left;

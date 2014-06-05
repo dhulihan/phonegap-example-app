@@ -1,81 +1,115 @@
 <!DOCTYPE html>
 <!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+	Licensed to the Apache Software Foundation (ASF) under one
+	or more contributor license agreements.  See the NOTICE file
+	distributed with this work for additional information
+	regarding copyright ownership.  The ASF licenses this file
+	to you under the Apache License, Version 2.0 (the
+	"License"); you may not use this file except in compliance
+	with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
+	Unless required by applicable law or agreed to in writing,
+	software distributed under the License is distributed on an
+	"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+	 KIND, either express or implied.  See the License for the
+	specific language governing permissions and limitations
+	under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />    
-        <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />    
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <div class="container container-primary">
-                <h1>Example App</h1>
-                <div id="deviceready" class="blink">
-                    <span class="label label-info event listening">Connecting to Device</span>
-                    <span class="label label-success event received">Device is Ready</span>
-                </div>
-                <div class="menu text-center">
-                    <button id='button-about' class="btn btn-info">Don't click me</button>
-                    <button id='button-go' class="btn btn-success">Click me</button>
-                </div>
-            </div>
-            <div class="container-fluid container-secondary">
-                <h2>Accelerometer</h2>
-                <table class="table">
-                    <tr>
-                        <td>X</td>
-                        <td><span id="accel-x">?</span></td>
-                    </tr>
-                    <tr>
-                        <td>Y</td>
-                        <td><span id="accel-y">?</span></td>
-                    </tr>
-                    <tr>
-                        <td>Z</td>
-                        <td><span id="accel-z">?</span></td>
-                    </tr>    
-                    <tr>
-                        <td>Timestamp</td>
-                        <td><span id="accel-time">?</span></td>
-                    </tr>                                    
-                </table>
-                <button id="button-accel" class="btn btn-primary">Update</button>
-            </div>
-            <div class="footer">
-                Written by <a href="http://www.davehulihan.com">Dave Hulihan</a>
-            </div>
-        </div>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />	
+		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />	
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<title>Hello World</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="lib/js/jquery.min.js"></script>        
-        <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+					<a class="navbar-brand" href="/">Example App</a>
+					<!--
+					<ul class="nav navbar-nav navbar-right">
+						<li><button class="btn btn-primary navbar-btn"><i class="glyphicon glyphicon-cog"></i></button></li>
+					</ul>
+					-->
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="#">Link</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="app" id="main">
+		</div>
 
-        <script type="text/javascript" src="js/storage/ls-store.js"></script>                
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+		<script id="home-tpl" type="text/x-handlebars-template">
+			<div class="container container-alpha">
+				<div id="deviceready" class="blink">
+					<span class="label label-info event listening">Connecting to Device</span>
+					<span class="label label-success event received">Device is Ready</span>
+				</div>
+				<div class="menu text-center">
+					<button id='button-dont' onclick="app.renderDontView()" class="btn btn-info">Render Template</button>
+					<button id='button-go' onclick="app.createNotification()" class="btn btn-success">Notificaiton</button>
+				</div>
+			</div>
+			<div class="container-fluid container-bravo">
+				<h2>Accelerometer</h2>
+				<table class="table">
+					<tr>
+						<td>X</td>
+						<td><span id="accel-x">?</span></td>
+					</tr>
+					<tr>
+						<td>Y</td>
+						<td><span id="accel-y">?</span></td>
+					</tr>
+					<tr>
+						<td>Z</td>
+						<td><span id="accel-z">?</span></td>
+					</tr>	
+					<tr>
+						<td>Timestamp</td>
+						<td><span id="accel-time">?</span></td>
+					</tr>									
+				</table>
+				<button id="button-accel" class="btn btn-primary">Update</button>
+			</div>
+			<div data-role="footer" class="footer">
+				Written by <a href="http://www.davehulihan.com">dhulihan</a>
+			</div>
+		</script>
+		<script id="dont-tpl" type="text/x-handlebars-template">
+			<div class="container container-alpha">
+				<div class="alert alert-success text-center">
+					Hi, I'm a template
+				</div>
+				<button onclick="app.renderHomeView()" class="btn btn-default">&laquo; Back</button>
+			</div>
+		</script>
+		<!-- <script type="text/javascript" src="phonegap.js"></script> -->
+		<script type="text/javascript" src="lib/js/handlebars.js"></script>		
+		<script type="text/javascript" src="lib/js/jquery.min.js"></script>		
+		<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/storage/ls-store.js"></script>				
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript">
+			app.initialize();		
+		</script>
+	</body>
 </html>

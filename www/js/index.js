@@ -16,6 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+var dontTpl = Handlebars.compile($("#dont-tpl").html());
+var homeTpl = Handlebars.compile($("#home-tpl").html());
+
 var app = {
 	// Application Constructor
 	initialize: function() {
@@ -28,6 +32,8 @@ var app = {
         });
         
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
+    
+		this.renderHomeView();  		
 	},
 	// Bind Event Listeners
 	//
@@ -40,6 +46,9 @@ var app = {
 	//
 	// The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicity call 'app.receivedEvent(...);'
+	createNotification: function() {
+		app.showAlert('You clicked a button', "Wow");
+	},
 	onDeviceReady: function() {
 		app.receivedEvent('deviceready');
 	},
@@ -54,6 +63,12 @@ var app = {
 
 		console.log('Received Event: ' + id);
 	},
+	renderDontView: function() {
+		$("#main").html(dontTpl());
+	},
+	renderHomeView: function() {
+		$('#main').html(homeTpl());
+	},  	
 	showAlert: function (message, title) {
 		if (navigator.notification) {
 			navigator.notification.alert(message, null, title, 'OK');
@@ -76,17 +91,8 @@ var app = {
 };
 
 $(window).load(function() {
-	    $("#button-about").on("click", function(){
-	    	app.showAlert("You shouldn't have clicked me.", "Tsk tsk");
-	    });    
-
-	    $("#button-go").on("click", function(){
-	    	//alert("clicky");
-	    	app.showAlert('You clicked a button', "Congrats");
-	    });    
-
 	    $("#button-accel").on("click", function(){
 	    	app.update_accel();
-	    });    
+	    }); 
 		//setTimeout("update_accel()", 3000);    
 });
